@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from libs.cases import get_covid_cases
 from libs.timedate import getDate
 
@@ -9,11 +9,11 @@ app = Flask(__name__)
 @app.route("/api/v1", methods=["GET"])
 @app.route("/api/v1/<date>", methods=["GET"])
 def index(date=None):
-    body_data = requests.json
+    body_data = request.json
 
     print(body_data)
     if date is None:
-        query_date = requests.args.get('date')
+        query_date = request.args.get('date')
         if query_date is not None:
             d = query_date
         else:
